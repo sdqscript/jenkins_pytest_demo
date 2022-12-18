@@ -20,9 +20,13 @@ pipeline {
         // }
         stage('pytest') {
             steps {
-               withPythonEnv("/usr/local/bin/${params.PYTHON}") {
-                    sh "python --version"
-               }
+                sh "ls"
+                withPythonEnv("/usr/local/bin/${params.PYTHON}") {
+                    sh """
+                    python --version
+                    pytest
+                    """
+                }
             }
         }
         // stage('Deploy') {
