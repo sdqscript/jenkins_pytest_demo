@@ -1,3 +1,14 @@
+properties([
+  parameters([
+    choice(
+      name: 'PYTHON',
+      description: 'Choose Python version',
+      choices: ["python3.9", "python3.11"].join("\n")
+    ),
+    
+  ])
+])
+
 pipeline {
     agent any
 
@@ -7,11 +18,11 @@ pipeline {
         //         echo 'Building..'
         //     }
         // }
-        stage('Test') {
+        stage('pytest') {
             steps {
-                sh """
-                pytest
-                """
+               withPythonEnv("/usr/local/bin/${params.PYTHON}") {
+                    sh "python --version"
+               }
             }
         }
         // stage('Deploy') {
