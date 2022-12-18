@@ -24,6 +24,7 @@ pipeline {
                 withPythonEnv("/usr/local/bin/${params.PYTHON}") {
                     sh """
                     python --version
+                    pip install pytest
                     pytest
                     """
                 }
